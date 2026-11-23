@@ -36,6 +36,11 @@ class Conflicto(ErrorApp):
     codigo = "CONFLICTO"
 
 
+class ServicioNoDisponible(ErrorApp):
+    status = 503
+    codigo = "SERVICIO_NO_DISPONIBLE"
+
+
 def respuesta_error(status: int, codigo: str, mensaje: str, detalles: list | None = None) -> JSONResponse:
     return JSONResponse(
         status_code=status,
