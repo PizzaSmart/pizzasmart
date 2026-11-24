@@ -218,3 +218,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# PizzaSmart: el frontend usa src/lib (la regla lib/ de arriba la ignoraba)
+!frontend/src/lib/
