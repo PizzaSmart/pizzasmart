@@ -26,6 +26,9 @@ uvicorn app.main:app --reload
 | Método | Ruta | Descripción |
 |--------|------|-------------|
 | GET | `/api/v1/salud` | Comprueba que la API está arriba |
+| GET | `/api/v1/categorias` | Categorías activas (T1-10) |
+| GET | `/api/v1/categorias/{id}/productos` | Productos activos de una categoría; `[]` si no tiene; 404 si la categoría no existe o está inactiva (T1-10) |
+| GET | `/api/v1/productos` | Todos los productos activos de categorías activas (T1-10) |
 | GET | `/api/v1/productos/{id}` | Detalle de un producto activo con categoría, variantes (`precio_total` = base + adicional) e ingredientes. 404 si no existe, está inactivo o su categoría está inactiva |
 
 ## Pruebas

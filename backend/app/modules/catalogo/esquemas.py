@@ -7,6 +7,23 @@ class CategoriaResumen(BaseModel):
     nombre: str
 
 
+class Categoria(BaseModel):
+    id: int
+    nombre: str
+    descripcion: str | None
+
+
+class ProductoResumen(BaseModel):
+    """Tarjeta del catálogo (HU-01)."""
+
+    id: int
+    nombre: str
+    descripcion: str | None
+    precio_base: float
+    imagen_url: str | None
+    categoria_id: int
+
+
 class Variante(BaseModel):
     id: int
     nombre: str

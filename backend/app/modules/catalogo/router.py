@@ -12,10 +12,33 @@ from decimal import Decimal
 from fastapi import APIRouter, Depends, Path
 
 from app.core.errores import NoEncontrado
-from app.modules.catalogo.esquemas import ProductoDetalle
+from app.modules.catalogo.esquemas import Categoria, ProductoDetalle, ProductoResumen
 from app.modules.catalogo.repositorio import RepositorioCatalogo, get_repositorio
 
 router = APIRouter(tags=["catalogo"])
+
+
+@router.get("/categorias", response_model=list[Categoria])
+def listar_categorias(repo: RepositorioCatalogo = Depends(get_repositorio)):
+    """Categorías activas."""
+    return repo.listar_categorias()
+
+
+@router.get("/categorias/{categoria_id}/productos", response_model=list[ProductoResumen])
+def productos_de_categoria(
+    categoria_id: int = Path(gt=0, description="Id de la categoría"),
+    repo: RepositorioCatalogo = Depends(get_repositorio),
+):
+    """Productos activos de una categoría. Una categoría activa sin productos devuelve []."""
+    if not repo.categoria_activa(categoria_id):
+        raise NoEncontrado("La categoría no existe o no está disponible.")
+    return repo.listar_productos(categoria_id)
+
+
+@router.get("/productos", response_model=list[ProductoResumen])
+def listar_productos(repo: RepositorioCatalogo = Depends(get_repositorio)):
+    """Todos los productos activos (filtro «Todas» de la carta)."""
+    return repo.listar_productos()
 
 
 @router.get("/productos/{producto_id}", response_model=ProductoDetalle)
