@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { color-scheme: dark; }
+  body { @apply bg-page font-cuerpo text-ink antialiased; }
+  h1, h2, h3 { @apply font-titulo font-bold tracking-tight; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-brand; }
+}
+
+@layer components {
+  .btn-primario {
+    @apply inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-4 font-semibold text-white transition hover:bg-brand-hover active:bg-brand-pressed disabled:cursor-not-allowed disabled:bg-raised disabled:text-ink-dim;
+  }
+  .btn-secundario {
+    @apply inline-flex items-center justify-center rounded-xl border border-strong px-4 py-2.5 text-sm font-semibold transition hover:bg-white/5;
+  }
+}
